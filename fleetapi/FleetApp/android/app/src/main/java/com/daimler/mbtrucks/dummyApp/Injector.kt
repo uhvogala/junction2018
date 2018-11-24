@@ -7,6 +7,7 @@ package com.daimler.mbtrucks.dummyApp
 import com.daimler.mbtrucks.dummyApp.repository.vehicle.VehicleClientCallback
 import com.daimler.mbtrucks.dummyApp.repository.vehicle.VehicleDataRepository
 import com.daimler.mbtrucks.dummyApp.services.DataSimulationService
+import com.fleetappreact.MainActivity
 
 ///
 // Bundle all your new repositories, services and activities together for
