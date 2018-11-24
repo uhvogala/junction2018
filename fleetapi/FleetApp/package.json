@@ -3,10 +3,14 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start"
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "bundle": "react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res"
   },
   "dependencies": {
+    "babel-preset-expo": "^5.0.0",
+    "metro-react-native-babel-preset": "^0.49.2",
     "react": "^16.6.3",
-    "react-native": "^0.57.5"
+    "react-native": "^0.57.5",
+    "react-native-cli": "^2.0.1"
   }
 }
