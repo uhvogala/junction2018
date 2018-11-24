@@ -12,132 +12,30 @@ class Gauges extends Component {
       drivingScore: 0,
       totalRange: 5000,
       fuelLevel: 1500,
-      fuelConsumption: 30,
-      drivingScoreColor: '#47e4c2'
+      fuelConsumption: 30
     }
   }
-
-  componentWillMount() {
-    setInterval(() => this.setDrivingScore(), 1);
-    setInterval(() => this.setFuelConsumption(), 100);
-    setInterval(() => this.setTotalRange(), 300);
-
-  }
-
-  setDrivingScore(){
-   
-    this.setState({
-      drivingScore: this.state.totalRange - this.state.fuelConsumption 
-    })
-
-
-    // if(this.state.drivingScore >= 0){
-    //   this.setState({
-    //     drivingScore: this.state.drivingScore + 1 //Math.random() * 50
-    //   })
-    // }
-    // else{
-    //   this.setState({
-    //     drivingScore: 0 //Math.random() * 50
-    //   })
-    // }
-
-    // set colors
-
-    //red
-    this.setState({
-      drivingScoreColor: '#e60808'
-    })
-
-    // orange
-    if(this.state.drivingScore > 25){
-      this.setState({
-        drivingScoreColor: '#ca7d22'
-      })
-    }
-
-    // yellow
-    if(this.state.drivingScore > 50){
-      this.setState({
-        drivingScoreColor: '#cac522'
-      })
-    }
-
-    // green
-    if(this.state.drivingScore > 75){
-      this.setState({
-        drivingScoreColor: '#30b4bd'
-      })
-    }
-  }
-
-  setFuelConsumption(){
-    if(this.state.fuelConsumption < 100){
-      this.setState({
-        fuelConsumption: this.state.fuelConsumption - Math.floor(Math.random()*(4-(-4)+1)+(-4))
-      })
-    }
-    else if(this.state.fuelConsumption < 0){
-      this.setState({
-        fuelConsumption: 30
-      })
-    }
-    else{
-      this.setState({
-        fuelConsumption: 30 //Math.random() * 50
-      })
-    }
-
-    // set colors
-
-    // //red
-    // this.setState({
-    //   drivingScoreColor: '#e60808'
-    // })
-
-    // // orange
-    // if(this.state.drivingScore > 25){
-    //   this.setState({
-    //     drivingScoreColor: '#ca7d22'
-    //   })
-    // }
-
-    // // yellow
-    // if(this.state.drivingScore > 50){
-    //   this.setState({
-    //     drivingScoreColor: '#cac522'
-    //   })
-    // }
-
-    // // green
-    // if(this.state.drivingScore > 75){
-    //   this.setState({
-    //     drivingScoreColor: '#14a02e'
-    //   })
-    // }
-  }
-
-  setTotalRange(){
-    this.setState({
-      totalRange: this.state.fuelLevel / (this.state.fuelConsumption / 100)
-    })
-  }
-
-
-
 
   render() {
+    const { fuelConsumption } = this.props;
+    const drivingScore = fuelConsumption;
+    let drivingScoreColor = '#e60808';
+    if (drivingScore > 25) drivingScoreColor = '#ca7d22';
+    if (drivingScore > 50) drivingScoreColor = '#cac522';
+    if (drivingScore > 75) drivingScoreColor = '#14a02e';
+
+
     return (
       <View style={styles.cont}>
         
         <View style={styles.gaugeCont}>
-          <Speedometer value={this.state.drivingScore} totalValue={5000} style={styles.gauge} 
-          internalColor={this.state.drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={false} />
+          <Speedometer value={drivingScore || 0} totalValue={5000} style={styles.gauge} 
+          internalColor={drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={false} />
           <Text style={styles.gaugeTitle}>Driving score</Text>
         </View>
 
         <View style={styles.gaugeCont}>
-          <Speedometer value={this.state.fuelConsumption} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
+          <Speedometer value={fuelConsumption || 0} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={drivingScoreColor}/>
           <Text style={styles.gaugeTitle}>Fuel consumption</Text> 
         </View>
         {/*<Text style={styles.gaugeTitle}>Total range</Text>

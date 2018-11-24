@@ -2,14 +2,14 @@ import React from 'react';
 import { 
   Platform, 
   StatusBar, 
-  StyleSheet, 
+  //StyleSheet, 
   View, 
-  Text } from 'react-native';
+  //Text 
+} from 'react-native';
 import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses";
 import Gauges from "./Gauges";
 import RangeGauge from "./RangeGauge";
-
 
 export default class App extends React.Component {
   state = {
@@ -23,8 +23,8 @@ export default class App extends React.Component {
       <View style={{flex: 1, flexDirection: 'row'}}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <View style={{width: '65%', backgroundColor: "#14162c"}}>
-          <Gauges />
-          <RangeGauge />
+          <Gauges data={apiData} />
+          <RangeGauge data={apiData} />
         </View>
         {/* Just an example on how to use values, remove this when actually implemented */}
         {/*<View style={styles.container}>
@@ -48,22 +48,3 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  header: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});

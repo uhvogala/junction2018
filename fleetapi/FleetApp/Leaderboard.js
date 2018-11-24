@@ -1,5 +1,11 @@
 import React, {Component} from "react"
-import {StyleSheet, Text, View} from 'react-native';
+import {
+  //StyleSheet, 
+  Text, 
+  View
+} from 'react-native';
+
+import EStyleSheet from "react-native-extended-stylesheet";
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -48,7 +54,7 @@ class Leaderboard extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   cont: {
     
   },
@@ -87,6 +93,6 @@ const styles = StyleSheet.create({
     borderColor: "#14162c",
     color: "white"
   }
-})
+});
 
 export default Leaderboard
