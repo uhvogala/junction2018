@@ -1,14 +1,23 @@
 import json
+import datetime
 
 from flask import Flask, request
-from flask_restful import Resource, Api
+from flask_restful import Resource, Api, reqparse
 
 app = Flask(__name__)
 api = Api(app)
 
 api_link = '/api/'
 
-err = {"message":"Not found"}
+filename = 'fleets.json'
+
+err = {"message": "Not found", "status": "1"}
+suc = {"message": "Values saved succesfully", "status": "0"}
+
+parser = reqparse.RequestParser()
+parser.add_argument('eff_kpi', type=str)
+parser.add_argument('ran_kpi', type=str)
+
 
 class RESTApi(Resource):
     def get(self):
@@ -16,26 +25,19 @@ class RESTApi(Resource):
 
 class Fleets(Resource):
     def get(self):
-        with open('fleets.json') as file:
+        with open(filename) as file:
             data = json.loads(file.read())
             return data
 
 class Fleet(Resource):
     def get(self, id):
-        with open('fleets.json') as file:
+        with open(filename) as file:
             data = json.loads(file.read())
-            print(request.args['parameters'])
-            if request.args['parameters']:
-                return data[id]['parameters'] or err
-            elif request.args['drivers']:
-                return data[id]['drivers'] or err
-            elif request.args['trucks']:
-                return data[id]['trucks'] or err
             return data[id]
 
 class FleetField(Resource):
     def get(self, id, field):
-        with open('fleets.json') as file:
+        with open(filename) as file:
             data = json.loads(file.read())
             if field == 'properties':
                 return data[id]['properties'] or err
@@ -48,7 +50,7 @@ class FleetField(Resource):
 
 class Drivers(Resource):
     def get(self):
-        with open('fleets.json') as file:
+        with open(filename) as file:
             data = json.loads(file.read())
             drivers = []
             for fleet in data.keys():
@@ -56,15 +58,44 @@ class Drivers(Resource):
         return drivers
 
 class Driver(Resource):
-    def get(self, id):
-        with open('fleets.json') as file:
+    def get(self, driverid):
+        with open(filename) as file:
             data = json.loads(file.read())
-            for fleet in data.keys():
-                for driver in data[fleet]['drivers']:
-                    print(driver)
-                    if driver['driverid'] == id:
-                        return driver
+            return self._fetch_driver(data, driverid) or err
         return err
+
+    def post(self, driverid):
+        with open(filename, 'r') as file:
+            data = json.loads(file.read())
+            driver = self._fetch_driver(data, driverid)
+            args = parser.parse_args()
+            if args['eff_kpi']:
+                driver['eff_kpi'].append({
+                    'time': str(datetime.datetime.now()),
+                    'value': args['eff_kpi']
+                    })
+            if args['ran_kpi']:
+                driver['ran_kpi'].append({
+                    'time': str(datetime.datetime.now()),
+                    'value': args['ran_kpi']
+                    })
+        with open(filename, 'w') as file:
+            json.dump(data, file, indent=4, sort_keys=True)
+
+        return suc
+
+    def _fetch_driver(self, data, driverid):
+        for fleet in data.keys():
+            for driver in data[fleet]['drivers']:
+                if driver['driverid'] == driverid:
+                    return driver
+        return None
+    
+    def _write_driver(self, data, new_driver, driverid):
+        for fleet in data.keys():
+            for driver in data[fleet]['drivers']:
+                if driver['driverid'] == driverid:
+                    return driver
 
 class Trucks(Resource):
     def get(self):
@@ -75,21 +106,32 @@ class Trucks(Resource):
                 trucks.extend(data[fleet]['trucks'])
         return trucks
 
+class Leaderboard(object):
+    def update(self):
+        pass
+
+    def fetch(self):
+        pass
+
+
+    
+
 # Api base
 api.add_resource(RESTApi, api_link)
 
 # Fleets
 api.add_resource(Fleets, api_link + 'fleets/')
 api.add_resource(Fleet, api_link + 'fleets/<string:id>/')
-api.add_resource(FleetField, api_link + 'fleets/<string:id>/<string:field>')
+api.add_resource(FleetField, api_link + 'fleets/<string:driverid>/<string:field>')
 
 # Drivers
 api.add_resource(Drivers, api_link + 'drivers/')
-api.add_resource(Driver, api_link + 'drivers/<string:id>/')
+api.add_resource(Driver, api_link + 'drivers/<string:driverid>/')
 
 # Trucks
 api.add_resource(Trucks, api_link + 'trucks/')
 
 
 if __name__ == '__main__':
+    leadboard = Leaderboard()
     app.run(debug=True)

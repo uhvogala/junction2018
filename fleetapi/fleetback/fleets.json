@@ -1,20 +1,22 @@
 {
-    "fleet1":{
-        "properties":{
-            "name": "Happy fleet",
-            "company": "Fleet gamers"
-        },
-        "drivers":[
+    "fleet1": {
+        "drivers": [
             {
-                "name": "Happy driver",
-                "driverid": "fleeter1"
+                "driverid": "fleeter1",
+                "eff_kpi": [],
+                "name": "Happy driver"
             },
             {
-                "name": "Fuel teft",
-                "driverid": "fleeter2"
+                "driverid": "fleeter2",
+                "eff_kpi": [],
+                "name": "Fuel teft"
             }
         ],
-        "trucks":[
+        "properties": {
+            "company": "Fleet gamers",
+            "name": "Happy fleet"
+        },
+        "trucks": [
             {
                 "name": "Truck the trucker face",
                 "vehicleid": "123123"
@@ -24,24 +26,55 @@
                 "vehicleid": "123456"
             }
         ]
-
     },
-    "fleet2":{
-        "properties":{
-            "name": "Sad fleet",
-            "company": "Regular drivers"
-        },
-        "drivers":[
+    "fleet2": {
+        "drivers": [
             {
+                "driverid": "fleeter3",
+                "eff_kpi": [
+                    {
+                        "time": "2018-11-24 19:04:43.347882",
+                        "value": "500"
+                    },
+                    {
+                        "time": "2018-11-24 19:30:24.890063",
+                        "value": "750"
+                    },
+                    {
+                        "time": "2018-11-24 19:30:56.937916",
+                        "value": "750"
+                    },
+                    {
+                        "time": "2018-11-24 19:31:42.288133",
+                        "value": "750"
+                    }
+                ],
                 "name": "Bob Marley",
-                "driverid": "fleeter3"
+                "ran_kpi": [
+                    {
+                        "time": "2018-11-24 19:30:24.890084",
+                        "value": "750"
+                    },
+                    {
+                        "time": "2018-11-24 19:30:56.937961",
+                        "value": "300"
+                    },
+                    {
+                        "time": "2018-11-24 19:31:42.288149",
+                        "value": "300"
+                    }
+                ]
             },
             {
-                "name": "Michael Jackson",
-                "driverid": "fleeter4"
+                "driverid": "fleeter4",
+                "eff_kpi": [],
+                "name": "Michael Jackson"
             }
         ],
-        "trucks":[]
+        "properties": {
+            "company": "Regular drivers",
+            "name": "Sad fleet"
+        },
+        "trucks": []
     }
-
 }

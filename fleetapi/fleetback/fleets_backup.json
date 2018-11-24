@@ -1,0 +1,62 @@
+{
+    "fleet1":{
+        "properties":{
+            "name": "Happy fleet",
+            "company": "Fleet gamers"
+        },
+        "drivers":[
+            {
+                "name": "Happy driver",
+                "driverid": "fleeter1",
+                "eff_kpi":[
+                    
+                ]
+            },
+            {
+                "name": "Fuel teft",
+                "driverid": "fleeter2",
+                "eff_kpi":[
+
+                ]
+            }
+        ],
+        "trucks":[
+            {
+                "name": "Truck the trucker face",
+                "vehicleid": "123123"
+            },
+            {
+                "name": "Awesome hacked truck",
+                "vehicleid": "123456"
+            }
+        ]
+
+    },
+    "fleet2":{
+        "properties":{
+            "name": "Sad fleet",
+            "company": "Regular drivers"
+        },
+        "drivers":[
+            {
+                "name": "Bob Marley",
+                "driverid": "fleeter3",
+                "eff_kpi":[
+                    
+                ],
+                "ran_kpi": [
+
+                ]
+            },
+            {
+                "name": "Michael Jackson",
+                "driverid": "fleeter4",
+                "eff_kpi":[
+                    
+                ]
+            }
+        ],
+        "trucks":[]
+    }
+
+}
