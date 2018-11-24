@@ -25,7 +25,7 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{width: '60%', backgroundColor: 'powderblue'}}>
+          <View style={{width: '60%', backgroundColor: "#eee"}}>
             <Text style={styles.welcome}>INSERT TITLE HERE</Text>
             <Text style={styles.instructions}>KPI GOES IN HERE</Text>
             <Gauges />
