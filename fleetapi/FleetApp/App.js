@@ -1,8 +1,14 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View, Text } from 'react-native';
+import { 
+  Platform, 
+  StatusBar, 
+  StyleSheet, 
+  View, 
+  Text } from 'react-native';
 import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses";
 import Gauges from "./Gauges";
+import RangeGauge from "./RangeGauge";
 
 
 export default class App extends React.Component {
@@ -16,16 +22,15 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <View style={{width: '60%', backgroundColor: "#14162c"}}>
+        <View style={{width: '65%', backgroundColor: "#14162c"}}>
           <Gauges />
+          <RangeGauge />
         </View>
-
         {/* Just an example on how to use values, remove this when actually implemented */}
         <View style={styles.container}>
-          <Text style={styles.hello}>Current speed: {apiData.speed} km/h</Text>
+          <Text style={{color: "#ffffff"}}>Current speed: {apiData.speed} km/h</Text>
         </View>
-
-        <View style={{flex: 1, flexDirection: "column", width: "40%", backgroundColor: "#14162c"}}>
+        <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
           <Leaderboard data={apiData}/>
           <DriverBonuses data={apiData}/>
         </View>
