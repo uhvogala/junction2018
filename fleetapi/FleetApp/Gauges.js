@@ -12,8 +12,8 @@ class Gauges extends Component {
       drivingScore: 0,
       totalRange: 5000,
       fuelLevel: 1500,
-      fuelConsumption: 40,
-      drivingScoreColor: '#e60808'
+      fuelConsumption: 30,
+      drivingScoreColor: '#47e4c2'
     }
   }
 
@@ -66,7 +66,7 @@ class Gauges extends Component {
     // green
     if(this.state.drivingScore > 75){
       this.setState({
-        drivingScoreColor: '#14a02e'
+        drivingScoreColor: '#30b4bd'
       })
     }
   }
@@ -79,12 +79,12 @@ class Gauges extends Component {
     }
     else if(this.state.fuelConsumption < 0){
       this.setState({
-        fuelConsumption: 50
+        fuelConsumption: 30
       })
     }
     else{
       this.setState({
-        fuelConsumption: 50 //Math.random() * 50
+        fuelConsumption: 30 //Math.random() * 50
       })
     }
 
@@ -130,14 +130,14 @@ class Gauges extends Component {
     return (
       <View elevation={5} style={styles.cont}>
         <Text style={styles.title}>Driving score</Text>
-        <Speedometer value={this.state.drivingScore} totalValue={7000} style={styles.gauge} 
-          internalColor={this.state.drivingScoreColor} showLabels={true} />
+        <Speedometer value={this.state.drivingScore} totalValue={5000} style={styles.gauge} 
+          internalColor={this.state.drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={false} />
 
         <Text style={styles.title}>Fuel consumption</Text>
-        <Speedometer value={this.state.fuelConsumption} totalValue={80} style={styles.gauge} showLabels={true}/>
+        <Speedometer value={this.state.fuelConsumption} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
 
         <Text style={styles.title}>Total range</Text>
-        <Speedometer value={this.state.totalRange} totalValue={8000} style={styles.gauge} showLabels={true}/>
+        <Speedometer value={this.state.totalRange} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={5000} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
       </View>
     )
   }
@@ -151,7 +151,9 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: "center",
     fontWeight: "200",
-    marginTop: 30
+    marginTop: 30,
+    color: "#eee",
+    marginBottom: 10
   },
 
   leaderboardCont: {
