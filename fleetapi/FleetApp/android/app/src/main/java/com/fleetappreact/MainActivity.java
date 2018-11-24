@@ -84,23 +84,25 @@ public class MainActivity extends ReactActivity implements IVehicleDataSubscribe
     // Speed updated
     @Override
     public void onVehicleSpeed(float speed) {
-        emitVehicleMessage("speed", String.format("%.2f", speed));//Float.toString(speed));
+        emitVehicleMessage("speed", String.format("%.2f", speed));
     }
 
     // Total distance updated
     @Override
     public void onTotalVehicleDistance(long totalDistance) {
-        // TODO: Remove
+        emitVehicleMessage("distance", Long.toString(totalDistance));
     }
 
+    // Fuel consumption changed
     @Override
     public void onFuelConsumption(float fuelConsumption) {
-        emitVehicleMessage("fuelConsumption", String.format("%.2f", fuelConsumption * 100.0f));//Float.toString(fuelConsumption));
+        emitVehicleMessage("fuelConsumption", String.format("%.2f", fuelConsumption * 100.0f));
     }
 
+    // Fuel level changed
     @Override
     public void onFuelLevel(float fuelLevel) {
-        emitVehicleMessage("fuelLevel", String.format("%.2f", fuelLevel));//Float.toString(fuelLevel));
+        emitVehicleMessage("fuelLevel", String.format("%.2f", fuelLevel));
     }
 
     // Emit event to react-native

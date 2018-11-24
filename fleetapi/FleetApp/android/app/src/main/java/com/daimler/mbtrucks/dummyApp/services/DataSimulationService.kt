@@ -15,32 +15,6 @@ import java.util.*
 // Helper service for simulating incoming data from the FMS interface or CAN bus
 ///
 object DataSimulationService {
-
-    // Define a set of messages
-    var messages: Array<VehicleMessage> = arrayOf(
-            VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, 11.2f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, 10.2f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, 10.7f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, 11.3f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, 11.8f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, 60.7f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, 59.8f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, 58.9f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, 58.0f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, 57.1f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, 56.2f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 9.3f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 25.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 45.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 65.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 85.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 91.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.TOTAL_VEHICLE_DISTANCE, 134586L, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 93.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 95.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 87.4f, ValidState.VALID),
-            VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, 90.4f, ValidState.VALID))
-
     init {
         getDataFromSensor()
     }
@@ -51,19 +25,20 @@ object DataSimulationService {
         var timesUpdated = 0
         val maxFuelLevel = 200.0f
         var currentFuelLevel = 100.0f
+        var currentSpeed = 0.0f
+        var distance = 0f
         val r = Random()
-
-        //var initSpeed = 100.0
-
-        //var element = 0
 
         val runnable = object : Runnable {
             override fun run() {
+                // Distance = speed (km/h) * time (s => / 3600)
+                distance += (currentSpeed * (2f / 3600f))
                 // Update speed and fuel consumption every two seconds
-                val randomSpeed: Float = 60.0f + r.nextFloat() * 40.0f
+                currentSpeed = 60.0f + r.nextFloat() * 40.0f
                 val randomFuelConsumption: Float = 0.1f + r.nextFloat() * 0.89f
-                handleMessage(VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, randomSpeed, ValidState.VALID))
+                handleMessage(VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, currentSpeed, ValidState.VALID))
                 handleMessage(VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, randomFuelConsumption, ValidState.VALID))
+                handleMessage(VehicleMessage(VehicleTopicConsts.TOTAL_VEHICLE_DISTANCE, distance.toLong(), ValidState.VALID))
 
                 // Update fuel level every three times
                 if (timesUpdated.rem(3) == 0) {
