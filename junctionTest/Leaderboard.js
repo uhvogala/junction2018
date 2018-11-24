@@ -50,27 +50,27 @@ class Leaderboard extends Component {
 
 const styles = StyleSheet.create({
   cont: {
-    height: "50%"
+    //height: "50%"
   },
   title: {
     fontSize: 35,
     textAlign: "center",
     fontWeight: "200",
-    marginTop: 30
+    marginTop: "7%"
   },
   title2: {
     fontSize: 30,
     textAlign: "center",
     fontWeight: "200",
-    backgroundColor: "#636eed",
+    backgroundColor: "#534fc3",//"#636eed",//"#534bae",//
     color: "white",
-    paddingVertical: 17,
+    paddingVertical: "3%",
     borderTopLeftRadius: 5,
     borderTopRightRadius: 5
   },
 
   leaderboardCont: {
-    marginTop: 20,
+    marginTop: "4%",
     backgroundColor: "#22233c",
     margin: 10,
     marginBottom: 0,
@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   leaderboardDriver: {
     textAlign: "center",
     fontSize: 22,
-    paddingVertical: 15,
+    paddingVertical: "2%",
     borderBottomWidth: 5,
     borderColor: "#14162c",
     color: "white"
