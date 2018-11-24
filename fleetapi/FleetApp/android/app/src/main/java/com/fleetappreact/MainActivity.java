@@ -17,6 +17,10 @@ public class MainActivity extends ReactActivity implements IVehicleDataSubscribe
     public VehicleDataRepository vehicleDataRepository;
     public DataSimulationService dataSimulationService;
 
+    // TODO: Needed?
+    // TODO: We probably always want to send data to backend no matter if the app is in foreground
+    private Boolean isInForeground = false;
+
     /**
      * Returns the name of the main component registered from JavaScript.
      * This is used to schedule rendering of the component.
@@ -44,6 +48,27 @@ public class MainActivity extends ReactActivity implements IVehicleDataSubscribe
         }, 1000);
     }
 
+    @Override
+    protected void onPause() {
+        isInForeground = false;
+        super.onPause();
+    }
+
+    @Override
+    protected void onResume() {
+        isInForeground = true;
+        super.onResume();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+        vehicleDataRepository.disconnectVehicle();
+        vehicleDataRepository.deinitializeSdk();
+        vehicleDataRepository.remove(this);
+    }
+
     // Connect to sdk
     private void connectVehicle(ReactContext reactContext) {
         try {
@@ -59,13 +84,23 @@ public class MainActivity extends ReactActivity implements IVehicleDataSubscribe
     // Speed updated
     @Override
     public void onVehicleSpeed(float speed) {
-        emitVehicleMessage("speed", Float.toString(speed));
+        emitVehicleMessage("speed", String.format("%.2f", speed));//Float.toString(speed));
     }
 
     // Total distance updated
     @Override
     public void onTotalVehicleDistance(long totalDistance) {
+        // TODO: Remove
+    }
 
+    @Override
+    public void onFuelConsumption(float fuelConsumption) {
+        emitVehicleMessage("fuelConsumption", String.format("%.2f", fuelConsumption * 100.0f));//Float.toString(fuelConsumption));
+    }
+
+    @Override
+    public void onFuelLevel(float fuelLevel) {
+        emitVehicleMessage("fuelLevel", String.format("%.2f", fuelLevel));//Float.toString(fuelLevel));
     }
 
     // Emit event to react-native
