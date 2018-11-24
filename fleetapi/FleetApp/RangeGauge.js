@@ -58,7 +58,7 @@ class RangeGauge extends Component {
 
     return (
       <View style={styles.cont}>
-        <Text style={styles.title}>Range</Text>
+        <Text style={{color: "#ffffff", alignContent: "center"}}>Range</Text>
         <View style={styles.gaugeOuter}>
           
           <View

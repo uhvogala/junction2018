@@ -1,7 +1,15 @@
 import React from 'react';
-import { Platform, StatusBar, StyleSheet, View } from 'react-native';
-import { AppLoading, Asset, Font, Icon } from 'expo';
-import AppNavigator from './navigation/AppNavigator';
+import { 
+  Platform, 
+  StatusBar, 
+  StyleSheet, 
+  View, 
+  Text } from 'react-native';
+import Leaderboard from './Leaderboard';
+import DriverBonuses from "./DriverBonuses";
+import Gauges from "./Gauges";
+import RangeGauge from "./RangeGauge";
+
 
 export default class App extends React.Component {
   state = {
@@ -9,39 +17,26 @@ export default class App extends React.Component {
   };
 
   render() {
-    if (!this.state.isLoadingComplete && !this.props.skipLoadingScreen) {
-      return (
-        <AppLoading
-          startAsync={this._loadResourcesAsync}
-          onError={this._handleLoadingError}
-          onFinish={this._handleFinishLoading}
-        />
-      );
-    } else {
-      return (
-        <View style={styles.container}>
-          {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-          <AppNavigator />
-        </View>
-      );
-    }
-  }
+    const { apiData } = this.props;
 
-  _loadResourcesAsync = async () => {
-    return Promise.all([
-      Asset.loadAsync([
-        require('./assets/images/robot-dev.png'),
-        require('./assets/images/robot-prod.png'),
-      ]),
-      Font.loadAsync({
-        // This is the font that we are using for our tab bar
-        ...Icon.Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
-        'space-mono': require('./assets/fonts/SpaceMono-Regular.ttf'),
-      }),
-    ]);
-  };
+    return (
+      <View style={{flex: 1, flexDirection: 'row'}}>
+        {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
+        <View style={{width: '65%', backgroundColor: "#14162c"}}>
+          <Gauges />
+          <RangeGauge />
+        </View>
+        {/* Just an example on how to use values, remove this when actually implemented */}
+        {/*<View style={styles.container}>
+          <Text style={{color: "#ffffff"}}>Current speed: {apiData.speed} km/h</Text>
+        </View>*/}
+        <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
+          <Leaderboard data={apiData}/>
+          <DriverBonuses data={apiData}/>
+        </View>
+      </View>
+    );
+  }
 
   _handleLoadingError = error => {
     // In this case, you might want to report the error to your error
@@ -57,6 +52,18 @@ export default class App extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#F5FCFF',
+  },
+  header: {
+    fontSize: 20,
+    textAlign: 'center',
+    margin: 10,
+  },
+  instructions: {
+    textAlign: 'center',
+    color: '#333333',
+    marginBottom: 5,
   },
 });

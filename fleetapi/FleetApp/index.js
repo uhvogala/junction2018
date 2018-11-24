@@ -1,12 +1,9 @@
 import React from 'react';
-import {AppRegistry, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
-import Leaderboard from './Leaderboard';
-import DriverBonuses from "./DriverBonuses"
-import Gauges from "./Gauges"
-import RangeGauge from './RangeGauge';
+import {DeviceEventEmitter, AppRegistry} from 'react-native';
+import App from './App';
 
 
-class HelloWorld extends React.Component {
+class FleetBoardApp extends React.Component {
   constructor (props) {
     super(props);
     this.state = { apiData: {} };
@@ -33,42 +30,9 @@ class HelloWorld extends React.Component {
 
   render() {
     return (
-      <View style={{flex: 1, flexDirection: 'row'}}>
-        <View style={{width: '65%', backgroundColor: "#14162c"}}>
-          <Gauges />
-          <RangeGauge />
-        </View>
-
-        {/* Just an example on how to use values, remove this when actually implemented */}
-        {/*<View style={styles.container}>
-          <Text style={styles.hello}>Current speed: {this.state.apiData.speed} km/h</Text>
-        </View>*/}
-
-        <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
-          <Leaderboard data={this.state.apiData}/>
-          <DriverBonuses data={this.state.apiData}/>
-        </View>
-
-      </View>
-    );
+      <App apiData={this.state.apiData} />
+    )
   }
 }
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  header: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
-});
-AppRegistry.registerComponent('MyReactNativeApp', () => HelloWorld);
+
+AppRegistry.registerComponent('MyReactNativeApp', () => FleetBoardApp);
