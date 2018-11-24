@@ -37,12 +37,13 @@ class HelloWorld extends React.Component {
         <View style={{width: '65%', backgroundColor: "#14162c"}}>
           <Gauges />
           <RangeGauge />
+          {/* Just an example on how to use values, remove this when actually implemented */}
+        <View style={styles.container}>
+          <Text style={{color: "#ffffff"}}>Current speed: {this.state.apiData.speed} km/h</Text>
+        </View>
         </View>
 
-        {/* Just an example on how to use values, remove this when actually implemented */}
-        <View style={styles.container}>
-          <Text style={styles.hello}>Current speed: {this.state.apiData.speed} km/h</Text>
-        </View>
+        
 
         <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
           <Leaderboard data={this.state.apiData}/>
@@ -58,7 +59,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#14162c'
   },
   header: {
     fontSize: 20,
