@@ -40,9 +40,9 @@ class HelloWorld extends React.Component {
         </View>
 
         {/* Just an example on how to use values, remove this when actually implemented */}
-        <View style={styles.container}>
+        {/*<View style={styles.container}>
           <Text style={styles.hello}>Current speed: {this.state.apiData.speed} km/h</Text>
-        </View>
+        </View>*/}
 
         <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
           <Leaderboard data={this.state.apiData}/>

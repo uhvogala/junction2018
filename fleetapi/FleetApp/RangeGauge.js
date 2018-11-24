@@ -6,9 +6,9 @@ class RangeGauge extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      normalRange: 450,
-      currentRange: 470,
-      totalRange: 490
+      normalRange: 400,
+      currentRange: 440,
+      totalRange: 460
     }
   }
 
@@ -42,15 +42,19 @@ class RangeGauge extends Component {
 
     const {normalRange, currentRange, totalRange} = this.state
 
-    const normalRangePercent = "70%" /*`${(normalRange / totalRange) * 100} %`*/
-    const worseRangePercent = "0%" /*currentRange < normalRange 
-      ? `${((currentRange / normalRange)) * 100} %` 
-      : "0"*/
-    const betterRangePercent = "10%" /*currentRange > normalRange 
-      ? `${((currentRange / normalRange) - 1) * 100} %`
-      : "0"*/
+    const rangeBetterThanNormal = currentRange > normalRange
 
-    console.log("PERCENT: ", normalRangePercent, worseRangePercent, betterRangePercent)
+    const normalRangePercent = `${Math.floor((normalRange / totalRange) * 100)}%`
+    const worseRangePercent = !rangeBetterThanNormal
+      ? `${Math.floor((currentRange / normalRange) * 100)}%` 
+      : "0%"
+    const betterRangePercent = rangeBetterThanNormal
+      ? `${Math.floor(((currentRange / normalRange) - 1) * 100)}%`
+      : "0%"
+
+
+    const normalRangeTextPercent = Math.floor((normalRange / totalRange) * 100) - 3
+    const currentRangeTextPercent = Math.floor((currentRange / totalRange) * 100) - 2
 
     return (
       <View style={styles.cont}>
@@ -63,12 +67,14 @@ class RangeGauge extends Component {
               width: normalRangePercent
             }}
           />
+
           <View 
             style={{
               ...styles.gaugeInnerWorse,
               width: worseRangePercent
             }}
           />
+
           <View 
             style={{
               ...styles.gaugeInnerBetter,
@@ -76,7 +82,33 @@ class RangeGauge extends Component {
               left: normalRangePercent
             }}
           />
-          
+        </View>
+
+        <View style={styles.textCont}>
+          <Text 
+            style={{
+              ...styles.rangeText,
+              position: "absolute",
+              left: `${normalRangeTextPercent}%`
+            }}
+          >Normal</Text>
+          <Text 
+            style={{
+              ...styles.rangeText,
+              position: "absolute",
+              left: `${currentRangeTextPercent}%`,
+              top: Math.abs(currentRangeTextPercent - normalRangeTextPercent) < 8
+                ? 15
+                : 0
+            }}
+          >Current</Text>
+        </View>
+        
+        <View style={styles.feedbackCont}>
+          <Text style={styles.feedbackText}>{rangeBetterThanNormal
+            ? "Estimated fuel range is higher than normal. Good job!"
+            : "Estimated fuel range is lower than normal."
+          }</Text>
         </View>
       </View>
     )
@@ -85,35 +117,50 @@ class RangeGauge extends Component {
 
 const styles = StyleSheet.create({
   cont: {
-
+    marginTop: "5%"
   },
   gaugeOuter: {
-    width: "90%",
-    marginLeft: "5%",
-    height: 20,
-    backgroundColor: "white"
+    width: "80%",
+    marginLeft: "10%",
+    height: 35,
+    backgroundColor: "white",
+    borderRadius: 3
   },
   gaugeInnerNormal: {
     position: "absolute",
-    //width: "80%",
     height: "100%",
-    backgroundColor: "#22233c"
+    backgroundColor: "#22233c",
+    borderRightWidth: 2,
+    borderColor: "white"
   },
   gaugeInnerWorse: {
     position: "absolute",
     zIndex: 5,
-    //width: 0,
-    //left: "0%",
     height: "100%",
-    backgroundColor: "red"
+    backgroundColor: "#ed2059"
   },
   gaugeInnerBetter: {
     position: "absolute",
     zIndex: 7,
-    //width: "5%",
-    //left: "80%",
     height: "100%",
-    backgroundColor: "green"
+    backgroundColor: "#30b4bd"
+  },
+
+  textCont: {
+    width: "80%",
+    marginLeft: "10%",
+    height: 35,
+    marginTop: 5
+  }, 
+  rangeText: {
+    color: "white"
+  },
+  feedbackCont: {
+    alignItems: "center"
+  },
+  feedbackText: {
+    color: "white",
+    fontSize: 20
   }
 })
 
