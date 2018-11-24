@@ -1,5 +1,6 @@
 import json
 import datetime
+import numpy as np
 
 from flask import Flask, request
 from flask_restful import Resource, Api, reqparse
@@ -81,7 +82,7 @@ class Driver(Resource):
                     })
         with open(filename, 'w') as file:
             json.dump(data, file, indent=4, sort_keys=True)
-
+        leadboard.update()
         return suc
 
     def _fetch_driver(self, data, driverid):
@@ -99,20 +100,64 @@ class Driver(Resource):
 
 class Trucks(Resource):
     def get(self):
-        with open('fleets.json') as file:
+        with open(filename) as file:
             data = json.loads(file.read())
             trucks = []
             for fleet in data.keys():
                 trucks.extend(data[fleet]['trucks'])
         return trucks
 
+class LeBoard(Resource):
+    def get(self):
+        with open('leaderboard.json') as file:
+            data = json.loads(file.read())
+            data.pop('scoreboard')
+            return data
+
 class Leaderboard(object):
+    def __init__(self):
+        tres = json.load(open("tresholds.json"))
+
     def update(self):
-        pass
+        data = json.load(open(filename))
+        self._update_eff(data)
+        self._update_ran(data)
+        self._update_scoreboard()
 
-    def fetch(self):
-        pass
+    def _update_eff(self, data):
+        lb = json.load(open("leaderboard.json"))
+        scores = []
+        for fleet in data.keys():
+            for driver in data[fleet]['drivers']:
+                ava = np.average([int(d['value']) for d in driver['eff_kpi']])
+                scores.append({
+                    "name": driver["name"],
+                    "score": str(ava)
+                    })
+        lb['eff_kpi'] = sorted(scores, key=lambda k: k['score'])
+        with open("leaderboard.json", 'w') as file:
+            json.dump(lb, file, indent=4, sort_keys=True)
 
+    def _update_ran(self, data):
+        lb = json.load(open("leaderboard.json"))
+        scores = []
+        for fleet in data.keys():
+            for driver in data[fleet]['drivers']:
+                ava = np.average([int(d['value']) for d in driver['ran_kpi']])
+                scores.append({
+                    "name": driver["name"],
+                    "score": str(ava)
+                    })
+        lb['ran_kpi']  = sorted(scores, key=lambda k: k['score'])
+        with open("leaderboard.json", 'w') as file:
+            json.dump(lb, file, indent=4, sort_keys=True)
+
+
+    def _update_scoreboard():
+
+
+        pass
+    
 
     
 
@@ -131,7 +176,10 @@ api.add_resource(Driver, api_link + 'drivers/<string:driverid>/')
 # Trucks
 api.add_resource(Trucks, api_link + 'trucks/')
 
+# Leaderboard
+api.add_resource(LeBoard, api_link + 'leaderboards/')
+
+leadboard = Leaderboard()
 
 if __name__ == '__main__':
-    leadboard = Leaderboard()
     app.run(debug=True)

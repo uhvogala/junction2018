@@ -1,0 +1,41 @@
+{
+    "eff_kpi": [
+        {
+            "name": "Happy driver",
+            "score": "1733.3333333333333"
+        },
+        {
+            "name": "Fuel teft",
+            "score": "475.0"
+        },
+        {
+            "name": "Michael Jackson",
+            "score": "650.0"
+        },
+        {
+            "name": "Bob Marley",
+            "score": "987.5"
+        }
+    ],
+    "ran_kpi": [
+        {
+            "name": "Happy driver",
+            "score": "1133.3333333333333"
+        },
+        {
+            "name": "Fuel teft",
+            "score": "175.0"
+        },
+        {
+            "name": "Michael Jackson",
+            "score": "450.0"
+        },
+        {
+            "name": "Bob Marley",
+            "score": "687.5"
+        }
+    ],
+    "scoreboard":[
+        
+    ]
+}
