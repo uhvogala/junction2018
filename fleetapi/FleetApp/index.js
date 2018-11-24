@@ -1,5 +1,5 @@
 import React from 'react';
-import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import {AppRegistry, StyleSheet, Text, View, DeviceEventEmitter} from 'react-native';
 import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses"
 import Gauges from "./Gauges"
@@ -12,6 +12,8 @@ class HelloWorld extends React.Component {
     this.state = { apiData: {} };
   } 
 
+  // The data comes in the form of {name: "VEHICLE_DATAPOINT", returnValue: "RETURN_VALUE"}
+  // E.g.: {name: "speed", returnValue: "90.3"}
   handleNewData = (event) => {
     let data = {};
     data[event.name] = event.returnValue;
@@ -21,11 +23,12 @@ class HelloWorld extends React.Component {
   }
 
   componentWillMount = () => {
-    //addEventListener();
+    // Listens to the onVehicleDataChanged event sent by android activity.
+    DeviceEventEmitter.addListener("onVehicleDataChanged", this.handleNewData);
   }
 
   componentWillUnmount = () => {
-    //removeEventListener();
+    DeviceEventEmitter.removeEventListener("onVehicleDataChanged", this.handleNewData);
   }
 
   render() {
@@ -36,7 +39,12 @@ class HelloWorld extends React.Component {
           <RangeGauge />
         </View>
 
-        <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>
+        {/* Just an example on how to use values, remove this when actually implemented */}
+        <View style={styles.container}>
+          <Text style={styles.hello}>Current speed: {this.state.apiData.speed} km/h</Text>
+        </View>
+
+        <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
           <Leaderboard data={this.state.apiData}/>
           <DriverBonuses data={this.state.apiData}/>
         </View>
