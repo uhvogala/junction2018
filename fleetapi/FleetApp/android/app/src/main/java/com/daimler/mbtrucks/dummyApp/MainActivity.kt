@@ -22,7 +22,9 @@ import com.facebook.react.ReactRootView
 import com.facebook.react.common.LifecycleState
 import com.facebook.react.modules.core.DefaultHardwareBackBtnHandler
 import com.facebook.react.shell.MainReactPackage
-import kotlinx.android.synthetic.main.activity_main.*
+import com.fleetappreact.BuildConfig
+
+//import kotlinx.android.synthetic.main.activity_main.*
 
 
 
@@ -122,7 +124,7 @@ class MainActivity : AppCompatActivity(), IVehicleDataSubscriber, DefaultHardwar
         // Only do something with incoming values, if the app is in foreground
         if (isInForeground) {
             // Show the new incoming value on the ui
-            txt_speed.text = speed.toInt().toString()
+            //txt_speed.text = speed.toInt().toString()
         }
     }
 
