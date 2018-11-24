@@ -8,6 +8,8 @@
 
 import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
+import Leaderboard from './Leaderboard';
+import DriverBonuses from "./DriverBonuses"
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -21,12 +23,18 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{width: '50%', backgroundColor: 'powderblue'}}>
+          <View style={{width: '60%', backgroundColor: 'powderblue'}}>
             <Text style={styles.welcome}>INSERT TITLE HERE</Text>
             <Text style={styles.instructions}>KPI GOES IN HERE</Text>
 
           </View>
-          <View style={{width: '50%', backgroundColor: 'skyblue'}}>
+
+          <View style={{flex: 1, flexDirection: "column", width: "40%", backgroundColor: "#eee"}}>
+            <Leaderboard />
+            <DriverBonuses />
+          </View>
+
+          {/*<View style={{width: '50%', backgroundColor: 'skyblue'}}>
             <View style={{height: '50%', backgroundColor: 'red'}}>
               <Text style={styles.instructions}>To g1234567et staradsdsadsated, edit App.js</Text>
               <Text style={styles.instructions}>{instructions}dsdssddrrrs</Text>
@@ -35,7 +43,7 @@ export default class App extends Component<Props> {
               <Text style={styles.instructions}>To g1234567et staradsdsadsated, edit App.js</Text>
               <Text style={styles.instructions}>{instructions}dsdssddrrrs</Text>
             </View>
-          </View>
+          </View>*/}
         </View>
 
 
