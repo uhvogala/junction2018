@@ -128,16 +128,21 @@ class Gauges extends Component {
 
   render() {
     return (
-      <View elevation={5} style={styles.cont}>
-        <Text style={styles.title}>Driving score</Text>
-        <Speedometer value={this.state.drivingScore} totalValue={5000} style={styles.gauge} 
+      <View style={styles.cont}>
+        
+        <View style={styles.gaugeCont}>
+          <Speedometer value={this.state.drivingScore} totalValue={5000} style={styles.gauge} 
           internalColor={this.state.drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={false} />
+          <Text style={styles.gaugeTitle}>Driving score</Text>
+        </View>
 
-        <Text style={styles.title}>Fuel consumption</Text>
-        <Speedometer value={this.state.fuelConsumption} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
-
-        <Text style={styles.title}>Total range</Text>
+        <View style={styles.gaugeCont}>
+          <Speedometer value={this.state.fuelConsumption} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
+          <Text style={styles.gaugeTitle}>Fuel consumption</Text> 
+        </View>
+        {/*<Text style={styles.gaugeTitle}>Total range</Text>
         <Speedometer value={this.state.totalRange} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={5000} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
+        */}
       </View>
     )
   }
@@ -145,23 +150,23 @@ class Gauges extends Component {
 
 const styles = StyleSheet.create({
   cont: {
-    height: "50%"
+    height: "40%",
+    flexDirection: "row",
+    justifyContent: "space-around"
   },
-  title: {
-    fontSize: 35,
+  gaugeTitle: {
+    fontSize: 30,
     textAlign: "center",
     fontWeight: "200",
-    marginTop: 30,
+    marginTop: "3%",
     color: "#eee",
     marginBottom: 10
   },
 
-  leaderboardCont: {
-    marginTop: 20,
-    backgroundColor: "white",
-    margin: 10,
-    marginBottom: 0,
-    borderRadius: 4
+  gaugeCont: {
+    marginTop: "5%",
+    width: "50%",
+    alignItems: "center"
   },
 
   leaderboardDriver: {
@@ -171,7 +176,7 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1
   },
   gauge: {
-    marginLeft: '35%'
+    //marginLeft: '35%'
   }
 })
 
