@@ -18,7 +18,8 @@ class Leaderboard extends Component {
     this.setState({
       leaderboard: [
         {position: "1", name: "Bob"},
-        {position: "2", name: "Kop"}
+        {position: "2", name: "Kop"},
+        {position: "3", name: "Beeboo buup"}
       ]
     })
     /*fetch("/leaderboard")
@@ -32,9 +33,9 @@ class Leaderboard extends Component {
     const {leaderboard, error} = this.state
 
     return (
-      <View elevation={5} style={styles.cont}>
-        <Text style={styles.title}>Leaderboard</Text>
+      <View style={styles.cont}>
         <View style={styles.leaderboardCont}>
+          <Text style={styles.title2}>Leaderboard</Text>
           {error 
             ? <Text style={styles.leaderboardDriver}>Couldn't load leaderboards</Text>
             : leaderboard.map(driver => (
@@ -49,28 +50,42 @@ class Leaderboard extends Component {
 
 const styles = StyleSheet.create({
   cont: {
-    height: "50%"
+    //height: "50%"
   },
   title: {
     fontSize: 35,
     textAlign: "center",
     fontWeight: "200",
-    marginTop: 30
+    marginTop: "7%"
+  },
+  title2: {
+    fontSize: 30,
+    textAlign: "center",
+    fontWeight: "200",
+    backgroundColor: "#534fc3",//"#636eed",//"#534bae",//
+    color: "white",
+    paddingVertical: "3%",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
   },
 
   leaderboardCont: {
-    marginTop: 20,
-    backgroundColor: "white",
+    marginTop: "4%",
+    backgroundColor: "#22233c",
     margin: 10,
     marginBottom: 0,
-    borderRadius: 4
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#14162c"
   },
 
   leaderboardDriver: {
     textAlign: "center",
-    fontSize: 25,
-    paddingVertical: 5,
-    borderBottomWidth: 1
+    fontSize: 22,
+    paddingVertical: "2%",
+    borderBottomWidth: 5,
+    borderColor: "#14162c",
+    color: "white"
   }
 })
 

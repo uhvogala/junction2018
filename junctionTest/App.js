@@ -10,6 +10,8 @@ import React, {Component} from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses"
+import Gauges from "./Gauges"
+import RangeGauce from './RangeGauge';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,18 +20,24 @@ const instructions = Platform.select({
     'Shake or press menu button for dev menu',
 });
 
-type Props = {};
-export default class App extends Component<Props> {
+
+export default class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      selectedTab: ""
+    }
+  }
+
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{width: '60%', backgroundColor: 'powderblue'}}>
-            <Text style={styles.welcome}>INSERT TITLE HERE</Text>
-            <Text style={styles.instructions}>KPI GOES IN HERE</Text>
-
+          <View style={{width: '60%', backgroundColor: "#14162c"}}>
+            <Gauges />
+            <RangeGauce />
           </View>
 
-          <View style={{flex: 1, flexDirection: "column", width: "40%", backgroundColor: "#eee"}}>
+          <View style={{flex: 1, flexDirection: "column", width: "40%", backgroundColor: "#14162c"}}>
             <Leaderboard />
             <DriverBonuses />
           </View>

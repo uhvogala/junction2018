@@ -34,19 +34,37 @@ class DriverBonuses extends Component {
 
     return (
       <View style={styles.cont}>
-        <Text style={styles.title}>Estimated  bonuses</Text>
-        <View style={styles.bonusesCont}>
-          <View style={styles.bonusCont}>
+        {/*<Text style={styles.title}>Estimated  bonuses</Text>*/}
+        {/*<View style={styles.bonusesCont}>
+          <Text style={styles.title2}>Estimated  bonuses</Text>
+          {/*<View style={styles.bonusCont}>
             <Text style={styles.bonusText}>Today</Text>
             <Text style={styles.bonusText}>{bonuses.daily ? `${bonuses.daily} €` : "-"}</Text>
           </View>
-          <View style={styles.bonusCont}>
-            <Text style={styles.bonusText}>This month</Text>
-            <Text style={styles.bonusText}>{bonuses.monthly ? `${bonuses.monthly} €` : "-"}</Text>
+          {/*<View style={styles.bonusBottomCont}>
+            <View style={styles.bonusBottomCont2}>
+              <Text style={styles.bonusText}>This month</Text>
+              <Text style={styles.bonusText}>{bonuses.monthly ? `${bonuses.monthly} €` : "-"}</Text>
+            </View>
+            <View style={styles.bonusBottomCont2}>
+              <Text style={styles.bonusText}>This year</Text>
+              <Text style={styles.bonusText}>{bonuses.yearly ? `${bonuses.yearly} €` : "-"}</Text>
+            </View>
           </View>
-          <View style={styles.bonusCont}>
-            <Text style={styles.bonusText}>This year</Text>
+        </View>*/}
+        <Text style={styles.title}>Estimated Bonuses</Text>
+        <View style={{...styles.bonusBottomCont2, width: "96%", margin: "2%"}}>
+          <Text style={styles.bonusText}>{bonuses.daily ? `${bonuses.daily} €` : "-"}</Text>
+          <Text style={styles.bonusText}>Today so far</Text>
+        </View>
+        <View style={styles.bonusBottomCont}>
+          <View style={styles.bonusBottomCont2}>
+            <Text style={styles.bonusText}>{bonuses.monthly ? `${bonuses.monthly} €` : "-"}</Text>
+            <Text style={styles.bonusText}>This month</Text>
+          </View>
+          <View style={styles.bonusBottomCont2}>
             <Text style={styles.bonusText}>{bonuses.yearly ? `${bonuses.yearly} €` : "-"}</Text>
+            <Text style={styles.bonusText}>This year</Text>
           </View>
         </View>
       </View>
@@ -56,30 +74,61 @@ class DriverBonuses extends Component {
 
 const styles = StyleSheet.create({
     cont: {
-      height: "47%",
-      backgroundColor: "white",
-      borderRadius: 4,
-      margin: 10
+      height: "45%"
     },
     title: {
-      fontSize: 35,
+      fontSize: 30,
       textAlign: "center",
-      fontWeight: "500",
-      marginTop: 30,
-      fontFamily: "Roboto"
+      fontWeight: "200",
+      marginTop: 10,
+      color: "white"
+    },
+    title2: {
+      fontSize: 30,
+      textAlign: "center",
+      fontWeight: "200",
+      backgroundColor: "#636eed",
+      color: "white",
+      paddingVertical: 17,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      color: "white"
     },
   
     bonusesCont: {
-      marginTop: 20
+      marginTop: 20,
+      backgroundColor: "#22233c",
+      borderRadius: 4,
+      margin: 10,
+      borderWidth: 1,
+      borderColor: "#ddd"
     },
   
     bonusCont: {
-      marginBottom: 10
+      marginBottom: 10,
+      padding: 5
+    },
+
+    bonusBottomCont: {
+      flex: 1,
+      flexDirection: "row",
+      justifyContent: "space-around"
+    },
+
+    bonusBottomCont2: {
+      marginBottom: 10,
+      padding: 5,
+      width: "45%",
+      backgroundColor: "#22233c",
+      borderLeftColor: "#636eed",
+      borderLeftWidth: 7,
+      borderRadius: 4
     },
 
     bonusText: {
-      textAlign: "center",
-      fontSize: 25
+      fontSize: 25,
+      marginLeft: 20,
+      color: "white"
     }
 })
 
