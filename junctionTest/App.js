@@ -25,13 +25,11 @@ export default class App extends Component<Props> {
   render() {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
-          <View style={{width: '60%', backgroundColor: "#eee"}}>
-            <Text style={styles.welcome}>INSERT TITLE HERE</Text>
-            <Text style={styles.instructions}>KPI GOES IN HERE</Text>
+          <View style={{width: '60%', backgroundColor: "#14162c"}}>
             <Gauges />
           </View>
 
-          <View style={{flex: 1, flexDirection: "column", width: "40%", backgroundColor: "#eee"}}>
+          <View style={{flex: 1, flexDirection: "column", width: "40%", backgroundColor: "#14162c"}}>
             <Leaderboard />
             <DriverBonuses />
           </View>

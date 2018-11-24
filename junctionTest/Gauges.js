@@ -13,7 +13,7 @@ class Gauges extends Component {
       totalRange: 5000,
       fuelLevel: 1500,
       fuelConsumption: 30,
-      drivingScoreColor: '#e60808'
+      drivingScoreColor: '#47e4c2'
     }
   }
 
@@ -66,7 +66,7 @@ class Gauges extends Component {
     // green
     if(this.state.drivingScore > 75){
       this.setState({
-        drivingScoreColor: '#14a02e'
+        drivingScoreColor: '#30b4bd'
       })
     }
   }
@@ -131,13 +131,13 @@ class Gauges extends Component {
       <View elevation={5} style={styles.cont}>
         <Text style={styles.title}>Driving score</Text>
         <Speedometer value={this.state.drivingScore} totalValue={5000} style={styles.gauge} 
-          internalColor={this.state.drivingScoreColor} showPercent={false} showLabels={true} />
+          internalColor={this.state.drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={true} />
 
         <Text style={styles.title}>Fuel consumption</Text>
-        <Speedometer value={this.state.fuelConsumption} totalValue={60} style={styles.gauge} showPercent={true}/>
+        <Speedometer value={this.state.fuelConsumption} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
 
         <Text style={styles.title}>Total range</Text>
-        <Speedometer value={this.state.totalRange} totalValue={5000} style={styles.gauge} showPercent={true}/>
+        <Speedometer value={this.state.totalRange} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={5000} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
       </View>
     )
   }
@@ -151,7 +151,9 @@ const styles = StyleSheet.create({
     fontSize: 35,
     textAlign: "center",
     fontWeight: "200",
-    marginTop: 30
+    marginTop: 30,
+    color: "#eee",
+    marginBottom: 10
   },
 
   leaderboardCont: {

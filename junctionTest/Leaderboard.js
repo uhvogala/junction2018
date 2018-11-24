@@ -71,20 +71,21 @@ const styles = StyleSheet.create({
 
   leaderboardCont: {
     marginTop: 20,
-    backgroundColor: "white",
+    backgroundColor: "#22233c",
     margin: 10,
     marginBottom: 0,
     borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#eee"
+    borderColor: "#14162c"
   },
 
   leaderboardDriver: {
     textAlign: "center",
     fontSize: 22,
     paddingVertical: 15,
-    borderBottomWidth: 1,
-    borderColor: "#eee"
+    borderBottomWidth: 5,
+    borderColor: "#14162c",
+    color: "white"
   }
 })
 

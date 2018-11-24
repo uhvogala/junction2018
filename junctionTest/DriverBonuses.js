@@ -80,7 +80,8 @@ const styles = StyleSheet.create({
       fontSize: 35,
       textAlign: "center",
       fontWeight: "200",
-      marginTop: 10
+      marginTop: 10,
+      color: "white"
     },
     title2: {
       fontSize: 30,
@@ -90,12 +91,13 @@ const styles = StyleSheet.create({
       color: "white",
       paddingVertical: 17,
       borderTopLeftRadius: 5,
-      borderTopRightRadius: 5
+      borderTopRightRadius: 5,
+      color: "white"
     },
   
     bonusesCont: {
       marginTop: 20,
-      backgroundColor: "white",
+      backgroundColor: "#22233c",
       borderRadius: 4,
       margin: 10,
       borderWidth: 1,
@@ -117,7 +119,7 @@ const styles = StyleSheet.create({
       marginBottom: 10,
       padding: 5,
       width: "45%",
-      backgroundColor: "white",
+      backgroundColor: "#22233c",
       borderLeftColor: "#636eed",
       borderLeftWidth: 7,
       borderRadius: 4
@@ -125,7 +127,8 @@ const styles = StyleSheet.create({
 
     bonusText: {
       fontSize: 25,
-      marginLeft: 20
+      marginLeft: 20,
+      color: "white"
     }
 })
 
