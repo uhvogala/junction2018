@@ -1,7 +1,12 @@
 FROM python:3
 
-ADD api.py /
+WORKDIR /app
 
-RUN pip install numpy Flask_RESTful Flask
+ADD . ./
 
-CMD [ "python3", "./api.py" ]
+RUN pip install -r requirements.txt
+RUN chmod -R a+rw .
+
+ENV FLASK_APP=api.py
+
+CMD [ "python3", "-m", "flask", "run", "--host=0.0.0.0" ]

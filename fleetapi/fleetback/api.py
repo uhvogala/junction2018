@@ -114,6 +114,12 @@ class LeBoard(Resource):
             data.pop('scoreboard')
             return data
 
+class ScBoard(Resource):
+    def get(self):
+        with open('leaderboard.json') as file:
+            data = json.loads(file.read())
+            return data['scoreboard']
+
 class Leaderboard(object):
     def __init__(self):
         tres = json.load(open("tresholds.json"))
@@ -130,11 +136,13 @@ class Leaderboard(object):
         for fleet in data.keys():
             for driver in data[fleet]['drivers']:
                 ava = np.average([int(d['value']) for d in driver['eff_kpi']])
+                if np.isnan(ava):
+                    ava = 0
                 scores.append({
                     "name": driver["name"],
-                    "score": str(ava)
+                    "score": int(ava)
                     })
-        lb['eff_kpi'] = sorted(scores, key=lambda k: k['score'])
+        lb['eff_kpi'] = sorted(scores, key=lambda k: k['score'], reverse=True)
         with open("leaderboard.json", 'w') as file:
             json.dump(lb, file, indent=4, sort_keys=True)
 
@@ -144,18 +152,37 @@ class Leaderboard(object):
         for fleet in data.keys():
             for driver in data[fleet]['drivers']:
                 ava = np.average([int(d['value']) for d in driver['ran_kpi']])
+                if np.isnan(ava):
+                    ava = 0
                 scores.append({
                     "name": driver["name"],
-                    "score": str(ava)
+                    "score": int(ava)
                     })
-        lb['ran_kpi']  = sorted(scores, key=lambda k: k['score'])
+        lb['ran_kpi']  = sorted(scores, key=lambda k: k['score'], reverse=True)
         with open("leaderboard.json", 'w') as file:
             json.dump(lb, file, indent=4, sort_keys=True)
 
 
-    def _update_scoreboard():
-
-
+    def _update_scoreboard(self):
+        data = json.load(open("leaderboard.json"))
+        data.pop('scoreboard')
+        driver_data = {}
+        kpi_amount = 0
+        for values in data:
+            for driver in data[values]:
+                try:    
+                    driver_data[driver['name']] += int(float(driver['score']))
+                except KeyError:
+                    driver_data[driver['name']] = int(float(driver['score']))
+            kpi_amount += 1
+        scores = []
+        for driver, value in driver_data.items():
+            scores.append({
+                driver : int(value / int(kpi_amount))
+            })
+        scores = sorted(scores, key=lambda k: next(iter(k.values())), reverse=True)
+        data.update({'scoreboard': scores})
+        json.dump(data, open("leaderboard.json", 'w'), indent=4, sort_keys=True)
         pass
     
 
@@ -178,6 +205,7 @@ api.add_resource(Trucks, api_link + 'trucks/')
 
 # Leaderboard
 api.add_resource(LeBoard, api_link + 'leaderboards/')
+api.add_resource(ScBoard, api_link + 'scoreboard/')
 
 leadboard = Leaderboard()
 
