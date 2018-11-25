@@ -5,6 +5,7 @@
 package com.daimler.mbtrucks.dummyApp.services
 
 import android.os.Handler
+import android.util.Log
 import com.daimler.mbtrucks.dummyApp.repository.vehicle.VehicleDataRepository.handleMessage
 import com.fleetboard.sdk.lib.vehicle.ValidState
 import com.fleetboard.sdk.lib.vehicle.VehicleMessage
@@ -22,22 +23,39 @@ object DataSimulationService {
     // Simulate data coming from the sensors every time interval [2sec]
     private fun getDataFromSensor() {
         val handler = Handler()
+
         var timePassed = 0
+
         val maxFuelLevel = 200.0f
         var currentFuelLevel = 100.0f
-        var currentSpeed = 0.0f
+
+        var currentFuelConsumption = 0.45f
+        val maxFuelConsumption = 1.0f
+
+        var currentSpeed = 60.0f
+        val speedMin = 40.0f
+        val speedMax = 80.0f
+
         var distance = 0f
+
         val r = Random()
 
         val runnable = object : Runnable {
             override fun run() {
                 // Distance = speed (km/h) * time (s => / 3600)
                 distance += (currentSpeed * (2f / 3600f))
+
                 // Update speed and fuel consumption every 0.1 seconds
-                currentSpeed = 60.0f + r.nextFloat() * 40.0f
-                val randomFuelConsumption: Float = 0.1f + r.nextFloat() * 0.89f
+                val randSpeedDifference = -2.0f + (r.nextFloat() * 4.0f) // Between -2 and 2
+                currentSpeed += randSpeedDifference //60.0f + r.nextFloat() * 40.0f
+                currentSpeed = Math.min(Math.max(currentSpeed, speedMin), speedMax)
+
+                val randFuelConsumptionDifference: Float = -0.03f + (r.nextFloat() * 0.06f) // between -0.03 and 0.03
+                currentFuelConsumption += randFuelConsumptionDifference //0.1f + r.nextFloat() * 0.89f
+                currentFuelConsumption = Math.max(Math.min(currentFuelConsumption, maxFuelConsumption), 0.0f)
+
                 handleMessage(VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, currentSpeed, ValidState.VALID))
-                handleMessage(VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, randomFuelConsumption, ValidState.VALID))
+                handleMessage(VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, currentFuelConsumption, ValidState.VALID))
                 handleMessage(VehicleMessage(VehicleTopicConsts.TOTAL_VEHICLE_DISTANCE, distance.toLong(), ValidState.VALID))
 
                 // Every 6 seconds

@@ -42,22 +42,26 @@ class ChallengeInfo extends Component {
 const styles = EStyleSheet.create({
     cont: {
         width: "70%",
-        marginLeft: "5%",
-      marginTop: "3%",
-      backgroundColor: "#22233c",
-      padding: "3%"
+        marginLeft: "7%",
+        marginTop: "3%",
+        backgroundColor: "#22233c",
+        //padding: "3%"
     },
     title: {
-      fontSize: '2rem',
-      textAlign: "center",
-      fontWeight: "200",
-      color: "#eee"
+        fontSize: '2rem',
+        textAlign: "center",
+        //paddingVertical: "3%",
+        backgroundColor: "#534fc3",
+        fontWeight: "200",
+        color: "#eee",
+        borderTopLeftRadius: 5,
+        borderTopRighRadiuis: 5
     },
     bonusText: {
-      fontSize: '1.2rem',
-      textAlign: "center",
-      marginTop: 20,
-      color: "#eee"
+        fontSize: '1.2rem',
+        textAlign: "center",
+        marginTop: 20,
+        color: "#eee"
     }
 })
 
