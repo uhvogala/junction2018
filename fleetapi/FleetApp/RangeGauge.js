@@ -58,7 +58,6 @@ class RangeGauge extends Component {
 
     return (
       <View style={styles.cont}>
-        <Text style={{color: "#ffffff", alignContent: "center"}}>Range</Text>
         <View style={styles.gaugeOuter}>
           
           <View
@@ -106,8 +105,8 @@ class RangeGauge extends Component {
         
         <View style={styles.feedbackCont}>
           <Text style={styles.feedbackText}>{rangeBetterThanNormal
-            ? "Estimated fuel range is higher than normal. Good job!"
-            : "Estimated fuel range is lower than normal."
+            ? "Efficiency is better than average. Good job!"
+            : "Efficiency is worse than average."
           }</Text>
         </View>
       </View>

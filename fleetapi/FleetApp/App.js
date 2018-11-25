@@ -22,7 +22,7 @@ export default class App extends React.Component {
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
-        <View style={{width: '65%', backgroundColor: "#14162c"}}>
+        <View style={{width: '70%', backgroundColor: "#14162c"}}>
           <Gauges />
           <RangeGauge />
         </View>
@@ -30,7 +30,7 @@ export default class App extends React.Component {
         {/*<View style={styles.container}>
           <Text style={{color: "#ffffff"}}>Current speed: {apiData.speed} km/h</Text>
         </View>*/}
-        <View style={{flex: 1, flexDirection: "column", width: "34%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
+        <View style={{flex: 1, flexDirection: "column", width: "29%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
           <Leaderboard data={apiData}/>
           <DriverBonuses data={apiData}/>
         </View>
