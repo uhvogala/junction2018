@@ -13,6 +13,7 @@ import RangeGauge from "./RangeGauge";
 import EStyleSheet from "react-native-extended-stylesheet";
 import ChallengesTab from "./ChallengesTab";
 import Challenges from "./Challenges";
+import ChallengeInfo from './ChallengeInfo';
 
 export default class App extends React.Component {
   constructor(props) {
@@ -47,6 +48,9 @@ export default class App extends React.Component {
           <Leaderboard data={apiData}/>
           <DriverBonuses data={apiData}/>
         </View>
+        {/*<View style={{backgroundColor: "#14162c"}}>
+          <ChallengeInfo />
+      </View>*/}
       </View>
     );
   }
