@@ -10,6 +10,7 @@ import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses";
 import Gauges from "./Gauges";
 import RangeGauge from "./RangeGauge";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 export default class App extends React.Component {
   state = {
@@ -48,3 +49,11 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 }
+
+EStyleSheet.build({
+  '@media (max-width: 500': {
+    $fontSize: '12px'
+  },
+  '@media (min-width: 1500)': {
+    $fontSize: '24px'
+}});

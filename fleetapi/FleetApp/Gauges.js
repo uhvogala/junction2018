@@ -1,6 +1,7 @@
 import React, {Component} from "react"
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
 import Speedometer from 'react-native-speedometer-chart';
+import EStyleSheet from "react-native-extended-stylesheet";
 
 var totalValue = 100;
 
@@ -17,7 +18,7 @@ class Gauges extends Component {
   }
 
   render() {
-    const { fuelConsumption } = this.props;
+    const { fuelConsumption } = this.props.data;
     const drivingScore = fuelConsumption;
     let drivingScoreColor = '#e60808';
     if (drivingScore > 25) drivingScoreColor = '#ca7d22';
@@ -29,13 +30,13 @@ class Gauges extends Component {
       <View style={styles.cont}>
         
         <View style={styles.gaugeCont}>
-          <Speedometer value={drivingScore || 0} totalValue={5000} style={styles.gauge} 
+          <Speedometer value={parseInt(drivingScore) || 0} totalValue={100} style={styles.gauge} 
           internalColor={drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={false} />
           <Text style={styles.gaugeTitle}>Driving score</Text>
         </View>
 
         <View style={styles.gaugeCont}>
-          <Speedometer value={fuelConsumption || 0} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={drivingScoreColor}/>
+          <Speedometer value={parseInt(fuelConsumption) || 0} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={100} style={styles.gauge} showPercent={false} internalColor={drivingScoreColor}/>
           <Text style={styles.gaugeTitle}>Fuel consumption</Text> 
         </View>
         {/*<Text style={styles.gaugeTitle}>Total range</Text>
@@ -46,14 +47,14 @@ class Gauges extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   cont: {
     height: "40%",
     flexDirection: "row",
     justifyContent: "space-around"
   },
   gaugeTitle: {
-    fontSize: 30,
+    fontSize: '1.2rem',
     textAlign: "center",
     fontWeight: "200",
     marginTop: "3%",
