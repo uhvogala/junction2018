@@ -46,7 +46,7 @@ class Gauges extends Component {
 
     //red
     this.setState({
-      drivingScoreColor: '#e60808'
+      drivingScoreColor: '#961d47'
     })
 
     // orange
@@ -130,14 +130,33 @@ class Gauges extends Component {
     return (
       <View elevation={5} style={styles.cont}>
         <Text style={styles.title}>Driving score</Text>
-        <Speedometer value={this.state.drivingScore} totalValue={5000} style={styles.gauge} 
-          internalColor={this.state.drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={true} />
+        <Speedometer 
+          value={this.state.drivingScore} 
+          totalValue={5000} 
+          style={styles.gauge} 
+          internalColor={this.state.drivingScoreColor} 
+          innerColor={"#14162c"} 
+          outerColor={"#22233c"} 
+          percentStyle={{ color: '#eee' }} 
+          showPercent={false} 
+          showLabels={true} 
+        />
 
         <Text style={styles.title}>Fuel consumption</Text>
-        <Speedometer value={this.state.fuelConsumption} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={60} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
+        <Speedometer 
+          value={this.state.fuelConsumption} 
+          innerColor={"#14162c"} 
+          outerColor={"#22233c"} 
+          percentStyle={{ color: '#eee' }} 
+          totalValue={60} 
+          style={styles.gauge} 
+          showPercent={true} 
+          internalColor={this.state.drivingScoreColor}
+        />
 
-        <Text style={styles.title}>Total range</Text>
+        {/*<Text style={styles.title}>Total range</Text>
         <Speedometer value={this.state.totalRange} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={5000} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>
+        */}
       </View>
     )
   }
@@ -145,7 +164,7 @@ class Gauges extends Component {
 
 const styles = StyleSheet.create({
   cont: {
-    height: "50%"
+    height: "70%"
   },
   title: {
     fontSize: 35,

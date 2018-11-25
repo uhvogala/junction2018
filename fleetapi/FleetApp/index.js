@@ -1,25 +1,38 @@
 import React from 'react';
-import {AppRegistry, StyleSheet, Text, View} from 'react-native';
+import {DeviceEventEmitter, AppRegistry} from 'react-native';
+import App from './App';
 
-class HelloWorld extends React.Component {
+
+class FleetBoardApp extends React.Component {
+  constructor (props) {
+    super(props);
+    this.state = { apiData: {} };
+  } 
+
+  // The data comes in the form of {name: "VEHICLE_DATAPOINT", returnValue: "RETURN_VALUE"}
+  // E.g.: {name: "speed", returnValue: "90.3"}
+  handleNewData = (event) => {
+    let data = {};
+    data[event.name] = event.returnValue;
+    const { apiData } = this.state;
+
+    this.setState({apiData: { ...apiData, ...data }});
+  }
+
+  componentWillMount = () => {
+    // Listens to the onVehicleDataChanged event sent by android activity.
+    DeviceEventEmitter.addListener("onVehicleDataChanged", this.handleNewData);
+  }
+
+  componentWillUnmount = () => {
+    DeviceEventEmitter.removeEventListener("onVehicleDataChanged", this.handleNewData);
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.hello}>Hello, World</Text>
-      </View>
-    );
+      <App apiData={this.state.apiData} />
+    )
   }
 }
-var styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  hello: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-});
 
-AppRegistry.registerComponent('MyReactNativeApp', () => HelloWorld);
+AppRegistry.registerComponent('MyReactNativeApp', () => FleetBoardApp);

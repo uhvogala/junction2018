@@ -58,15 +58,15 @@ class DriverBonuses extends Component {
           <Text style={styles.bonusText}>Today so far</Text>
         </View>
         <View style={styles.bonusBottomCont}>
-            <View style={styles.bonusBottomCont2}>
-              <Text style={styles.bonusText}>{bonuses.monthly ? `${bonuses.monthly} €` : "-"}</Text>
-              <Text style={styles.bonusText}>This month</Text>
-            </View>
-            <View style={styles.bonusBottomCont2}>
-              <Text style={styles.bonusText}>{bonuses.yearly ? `${bonuses.yearly} €` : "-"}</Text>
-              <Text style={styles.bonusText}>This year</Text>
-            </View>
+          <View style={styles.bonusBottomCont2}>
+            <Text style={styles.bonusText}>{bonuses.monthly ? `${bonuses.monthly} €` : "-"}</Text>
+            <Text style={styles.bonusText}>This month</Text>
           </View>
+          <View style={styles.bonusBottomCont2}>
+            <Text style={styles.bonusText}>{bonuses.yearly ? `${bonuses.yearly} €` : "-"}</Text>
+            <Text style={styles.bonusText}>This year</Text>
+          </View>
+        </View>
       </View>
     )
   }
@@ -74,10 +74,10 @@ class DriverBonuses extends Component {
 
 const styles = StyleSheet.create({
     cont: {
-      height: 238
+      height: "45%"
     },
     title: {
-      fontSize: 35,
+      fontSize: 30,
       textAlign: "center",
       fontWeight: "200",
       marginTop: 10,
