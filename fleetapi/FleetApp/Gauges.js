@@ -10,7 +10,7 @@ class Gauges extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      drivingScore: 0,
+      drivingScore: 30,
       totalRange: 5000,
       fuelLevel: 1500,
       fuelConsumption: 30
@@ -19,7 +19,8 @@ class Gauges extends Component {
 
   render() {
     const { fuelConsumption } = this.props.data;
-    const drivingScore = fuelConsumption;
+    console.log(this.props.data);
+    const drivingScore = (fuelConsumption * 0.33) + (0.65 * this.props.data.speed);
     let drivingScoreColor = '#e60808';
     if (drivingScore > 25) drivingScoreColor = '#ca7d22';
     if (drivingScore > 50) drivingScoreColor = '#cac522';
@@ -30,14 +31,14 @@ class Gauges extends Component {
       <View style={styles.cont}>
         
         <View style={styles.gaugeCont}>
-          <Speedometer value={parseInt(drivingScore) || 0} totalValue={100} style={styles.gauge} 
+          <Speedometer value={100 - parseInt(drivingScore) || 0} totalValue={100} style={styles.gauge} 
           internalColor={drivingScoreColor} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} showPercent={false} showLabels={false} />
           <Text style={styles.gaugeTitle}>Driving score</Text>
         </View>
 
         <View style={styles.gaugeCont}>
-          <Speedometer value={parseInt(fuelConsumption) || 0} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={100} style={styles.gauge} showPercent={false} internalColor={drivingScoreColor}/>
-          <Text style={styles.gaugeTitle}>Fuel consumption</Text> 
+          <Speedometer value={100 - parseInt(fuelConsumption) || 0} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={100} style={styles.gauge} showPercent={false} internalColor={drivingScoreColor}/>
+          <Text style={styles.gaugeTitle}>Fuel efficiency</Text> 
         </View>
         {/*<Text style={styles.gaugeTitle}>Total range</Text>
         <Speedometer value={this.state.totalRange} innerColor={"#14162c"} outerColor={"#22233c"} percentStyle={{ color: '#eee' }} totalValue={5000} style={styles.gauge} showPercent={true} internalColor={this.state.drivingScoreColor}/>

@@ -32,7 +32,7 @@ export default class App extends React.Component {
         {
           name: "Daily Safe Driving Challenge",
           description: "Drive as safely as possible.",
-          previousBestUser: "Bobo",
+          previousBestUser: "Bobox",
           previousBestValue: 96,
           distance: "142.6"
         }
@@ -61,7 +61,7 @@ export default class App extends React.Component {
             selected={selectedTab}
             style={{height: 40, width: '100%'}} onSelect={this.onTabSelect} />
           {selectedTab === 0 &&
-            <View><Gauges data={apiData} />
+            <View style={{justifyContent: 'center'}} ><Gauges data={apiData} />
             <RangeGauge data={apiData} /></View>
           }
           {selectedTab === 1 &&
