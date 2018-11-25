@@ -1,54 +1,68 @@
 import React, {Component} from "react"
-import {View, Text, StyleSheet} from "react-native"
-import Challenges from "./Challenges"
-import CurrentChallenge from "./CurrentChallenge"
+import {
+  View,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import EStyleSheet from "react-native-extended-stylesheet";
 
 class ChallengesTab extends Component {
   
   constructor(props) {
-    super(props)
-    this.state = {
-      challenges: [
-        {
-          name: "Daily Fuel Efficiency Challenge",
-          description: "Drive as efficiently as possible.\nScore is ratio between fuel consumption and distance traveled.",
-          previousBestUser: "John",
-          previousBestValue: 5,
-          distance: "14.6"
-        },
-        {
-          name: "Daily Safe Driving Challenge",
-          description: "Drive as safely as possible.",
-          previousBestUser: "Bobo",
-          previousBestValue: 8,
-          distance: "142.6"
-        }
-      ],
-      currentIndex: 0
-    }
-  }
-
-  changeChallenge = (index) => {
-    this.setState({currentIndex: index})
+    super(props);
+    this.state = {};
   }
 
   render() {
-
-    const {challenges, currentIndex} = this.state
+    const { onSelect, selected } = this.props;
 
     return (
       <View style={styles.cont}>
-        <Challenges challenges={challenges} changeChallenge={this.changeChallenge} />
-        <CurrentChallenge challenge={challenges[currentIndex]} />
+        <View style={{width: "50%"}}>
+          <TouchableOpacity
+            style={styles.tab}
+            onPress={() => onSelect(0)}
+          >
+            <Text style={styles.tabText}>Stats</Text>
+          </TouchableOpacity>
+          {selected === 0 && <View style={styles.selectedLine}/>}
+        </View>
+        <View style={{width: "50%"}}>
+          <TouchableOpacity
+            style={styles.tab}
+            onPress={() => onSelect(1)}
+          >
+            <Text style={styles.tabText}>Challenges</Text>
+          </TouchableOpacity>
+          {selected === 1 && <View style={styles.selectedLine}/>}
+        </View>
       </View>
     )
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
   cont: {
+    flexDirection: "row",
+    width: "100%"
+  },
+  tab: {
+    height: 40,
+    backgroundColor: "#22233c",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  tabText: {
+    color: "white",
+    fontSize: "1.2rem"
+  },
+  selectedLine: {
+    height: 3,
     width: "100%",
-    flexDirection: "row"
+    backgroundColor: "white",
+    position: "relative",
+    top: -3
+
   }
 })
 

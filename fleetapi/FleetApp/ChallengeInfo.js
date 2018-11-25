@@ -26,13 +26,14 @@ class ChallengeInfo extends Component {
     }
 
     render() {
-        const {challenge} = this.props
+        const {challenge, score} = this.props
 
         return (
             <View style={styles.cont}>
                 <Text style={styles.title}>{challenge.name}</Text>
                 <Text style={styles.bonusText}>{challenge.description}</Text>
                 <Text style={styles.bonusText}>Previous best: {challenge.previousBestValue} by {challenge.previousBestUser}</Text>
+                <Text style={styles.bonusText}>Current score: {Math.floor(100 - (score / 10))}</Text>
             </View>
         )
     }

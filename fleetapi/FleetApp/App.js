@@ -10,30 +10,67 @@ import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses";
 import Gauges from "./Gauges";
 import RangeGauge from "./RangeGauge";
-import EStyleSheet from "react-native-extended-stylesheet"
-import ChallengesTab from "./ChallengesTab"
+import EStyleSheet from "react-native-extended-stylesheet";
+import ChallengesTab from "./ChallengesTab";
+import Challenges from "./Challenges";
+import CurrentChallenge from './CurrentChallenge';
 
 
 export default class App extends React.Component {
-  state = {
-    isLoadingComplete: false,
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      selectedTab: 0,
+      challenges: [
+        {
+          name: "Daily Fuel Efficiency Challenge",
+          description: "Drive as efficiently as possible.\nScore is ratio between fuel consumption and distance traveled.",
+          previousBestUser: "John",
+          previousBestValue: 98,
+          distance: "14.6"
+        },
+        {
+          name: "Daily Safe Driving Challenge",
+          description: "Drive as safely as possible.",
+          previousBestUser: "Bobo",
+          previousBestValue: 96,
+          distance: "142.6"
+        }
+      ],
+      currentIndex: 0
+    }
+  }
+
+  changeChallenge = (index) => {
+    this.setState({currentIndex: index})
+  }
+
+  onTabSelect = (tab) => {
+    this.setState({selectedTab: tab})
+  }
 
   render() {
     const { apiData } = this.props;
+    const { selectedTab, challenges, currentIndex } = this.state;
 
     return (
       <View style={{flex: 1, flexDirection: 'row'}}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <View style={{width: '70%', backgroundColor: "#14162c"}}>
-          {/*<Gauges data={apiData} />
-          <RangeGauge data={apiData} />*/}
-          <ChallengesTab />
+          <ChallengesTab 
+            selected={selectedTab}
+            style={{height: 40, width: '100%'}} onSelect={this.onTabSelect} />
+          {selectedTab === 0 &&
+            <View><Gauges data={apiData} />
+            <RangeGauge data={apiData} /></View>
+          }
+          {selectedTab === 1 &&
+            <View style={{ width: "100%", flexDirection: "row"}}>
+              <Challenges challenges={challenges} changeChallenge={this.changeChallenge} />
+              <CurrentChallenge challenge={challenges[currentIndex]} />
+            </View>
+          }
         </View>
-        {/* Just an example on how to use values, remove this when actually implemented */}
-        {/*<View style={styles.container}>
-          <Text style={{color: "#ffffff"}}>Current speed: {apiData.speed} km/h</Text>
-        </View>*/}
         <View style={{flex: 1, flexDirection: "column", width: "29%", paddingRight: "1%", backgroundColor: "#14162c"}}>  
           <Leaderboard data={apiData}/>
           <DriverBonuses data={apiData}/>

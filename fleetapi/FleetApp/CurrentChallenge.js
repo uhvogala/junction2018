@@ -7,12 +7,17 @@ class CurrentChallenge extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      pos: 100
+      pos: 100,
+      intervalID: null
     }
   }
 
   componentWillMount() {
-    setInterval(() => this.setState({pos: Math.max(this.state.pos - 0.5, 0)}), 250)
+    this.intervalID = setInterval(() => this.setState({pos: Math.max(this.state.pos - 0.5, 0)}), 250)
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.intervalID)
   }
 
   render() {
@@ -37,7 +42,7 @@ class CurrentChallenge extends Component {
           </View>
           <Text style={styles.startText}>Start</Text>
         </View>
-        <ChallengeInfo challenge={challenge} />
+        <ChallengeInfo challenge={challenge} score={pos} />
       </View>
     )
   }
