@@ -1,5 +1,6 @@
 import React, {Component} from "react"
-import {StyleSheet, Text, View} from 'react-native';
+import {Text, View} from 'react-native';
+import EStyleSheet from "react-native-extended-stylesheet";
 
 class DriverBonuses extends Component {
   constructor(props) {
@@ -54,12 +55,12 @@ class DriverBonuses extends Component {
   }
 }
 
-const styles = StyleSheet.create({
+const styles = EStyleSheet.create({
     cont: {
       marginTop: "5%"
     },
     title: {
-      fontSize: 30,
+      fontSize: '2rem',
       textAlign: "center",
       fontWeight: "200",
       marginTop: 10,
@@ -107,7 +108,7 @@ const styles = StyleSheet.create({
     },
 
     bonusText: {
-      fontSize: 25,
+      fontSize: '1.2rem',
       marginLeft: 20,
       color: "white"
     }

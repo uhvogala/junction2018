@@ -1,6 +1,69 @@
 import React, {Component} from "react"
-import {StyleSheet, Text, View} from 'react-native';
 import constants from "./constants.js"
+import {
+  //StyleSheet, 
+  Text, 
+  View
+} from 'react-native';
+
+import EStyleSheet from "react-native-extended-stylesheet";
+
+const styles = EStyleSheet.create({
+  title: {
+    fontSize: '2rem',
+    textAlign: "center",
+    fontWeight: "200",
+    backgroundColor: "#534fc3",
+    color: "white",
+    paddingVertical: "3%",
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5
+  },
+
+  leaderboardCont: {
+    marginTop: "4%",
+    backgroundColor: "#22233c",
+    margin: 5,
+    marginBottom: 0,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: "#14162c"
+  },
+
+  leaderboardDriver: {
+    textAlign: "center",
+    fontSize: "1.2rem",
+    paddingVertical: "2%",
+    borderBottomWidth: 5,
+    borderColor: "#14162c",
+    color: "white"
+  },
+
+  driverCont: {
+    flexDirection: "row",
+    paddingVertical: "2%",
+    borderBottomWidth: 5,
+    borderColor: "#14162c"
+  },
+  leaderboardDriverName: {
+    width: "60%",
+    color: "white",
+    fontSize: "1.2rem",
+    textAlign: "left"
+  },
+  leaderboardDriverPos: {
+    width: "20%",
+    color: "white",
+    fontSize: "1.2rem",
+    textAlign: "center"
+  },
+  leaderboardDriverScore: {
+    width: "20%",
+    color: "white",
+    fontSize: "1.2rem",
+    textAlign: "left"
+  }
+});
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -10,7 +73,7 @@ class Leaderboard extends Component {
       error: false
     }
   }
-
+  
   componentWillMount() {
     this.getLeaderboard()
   }
@@ -40,7 +103,7 @@ class Leaderboard extends Component {
     return (
       <View style={styles.cont}>
         <View style={styles.leaderboardCont}>
-          <Text style={styles.title2}>Leaderboard</Text>
+          <Text style={styles.title}>Leaderboard</Text>
           {error 
             ? <Text style={styles.leaderboardDriver}>Couldn't load leaderboards</Text>
             : leaderboard.map(driver => (
@@ -56,71 +119,5 @@ class Leaderboard extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  cont: {
-
-  },
-  title: {
-    fontSize: 35,
-    textAlign: "center",
-    fontWeight: "200",
-    marginTop: "7%"
-  },
-  title2: {
-    fontSize: 30,
-    textAlign: "center",
-    fontWeight: "200",
-    backgroundColor: "#534fc3",
-    color: "white",
-    paddingVertical: "3%",
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5
-  },
-
-  leaderboardCont: {
-    marginTop: "4%",
-    backgroundColor: "#22233c",
-    margin: 10,
-    marginBottom: 0,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: "#14162c"
-  },
-
-  leaderboardDriver: {
-    textAlign: "center",
-    fontSize: 22,
-    paddingVertical: "2%",
-    borderBottomWidth: 5,
-    borderColor: "#14162c",
-    color: "white"
-  },
-
-  driverCont: {
-    flexDirection: "row",
-    paddingVertical: "2%",
-    borderBottomWidth: 5,
-    borderColor: "#14162c"
-  },
-  leaderboardDriverName: {
-    width: "60%",
-    color: "white",
-    fontSize: 22,
-    textAlign: "left"
-  },
-  leaderboardDriverPos: {
-    width: "20%",
-    color: "white",
-    fontSize: 22,
-    textAlign: "center"
-  },
-  leaderboardDriverScore: {
-    width: "20%",
-    color: "white",
-    fontSize: 22,
-    textAlign: "left"
-  }
-})
 
 export default Leaderboard
