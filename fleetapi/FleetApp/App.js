@@ -11,6 +11,7 @@ import DriverBonuses from "./DriverBonuses";
 import Gauges from "./Gauges";
 import RangeGauge from "./RangeGauge";
 import EStyleSheet from "react-native-extended-stylesheet";
+import ChallengesTab from "./ChallengesTab"
 
 export default class App extends React.Component {
   state = {
@@ -24,8 +25,9 @@ export default class App extends React.Component {
       <View style={{flex: 1, flexDirection: 'row'}}>
         {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
         <View style={{width: '70%', backgroundColor: "#14162c"}}>
-          <Gauges data={apiData} />
-          <RangeGauge data={apiData} />
+          {/*<Gauges data={apiData} />
+          <RangeGauge data={apiData} />*/}
+          <ChallengesTab />
         </View>
         {/* Just an example on how to use values, remove this when actually implemented */}
         {/*<View style={styles.container}>

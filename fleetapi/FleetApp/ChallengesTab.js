@@ -1,5 +1,7 @@
 import React, {Component} from "react"
 import {View, Text, StyleSheet} from "react-native"
+import Challenges from "./Challenges"
+import CurrentChallenge from "./CurrentChallenge"
 
 class ChallengesTab extends Component {
   
@@ -25,7 +27,8 @@ class ChallengesTab extends Component {
 }
 
 const styles = StyleSheet.create({
-
+  cont: {
+  }
 })
 
 export default ChallengesTab
