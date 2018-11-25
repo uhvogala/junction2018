@@ -10,12 +10,9 @@ import Leaderboard from './Leaderboard';
 import DriverBonuses from "./DriverBonuses";
 import Gauges from "./Gauges";
 import RangeGauge from "./RangeGauge";
-import EStyleSheet from "react-native-extended-stylesheet";
-<<<<<<< HEAD
+import EStyleSheet from "react-native-extended-stylesheet"
 import ChallengesTab from "./ChallengesTab"
-=======
-import ChallengeInfo from './ChallengeInfo';
->>>>>>> 2f7cbc9d6adfc5f9b89ba29e516bd4e46a4928a4
+
 
 export default class App extends React.Component {
   state = {

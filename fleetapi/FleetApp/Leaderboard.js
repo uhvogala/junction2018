@@ -87,11 +87,11 @@ class Leaderboard extends Component {
       ]
     })*/
 
-    const url = `${constants.ENDPOINT}/leaderboards`
+    const url = `${constants.ENDPOINT}/scoreboard`
     fetch(url)
     .then(resp => resp.json())
     .then(data => {
-      this.setState({leaderboard: data.eff_kpi.map((driver, i) => ({...driver, position: i+1})), error: false})
+      this.setState({leaderboard: data.map((driver, i) => ({name: Object.keys(driver)[0], score:  Object.values(driver)[0], position: i+1})).slice(0,4), error: false})
     })
     .catch(err => this.setState({error: true}))
   }

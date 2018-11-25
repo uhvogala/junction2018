@@ -26,7 +26,7 @@ class ChallengeInfo extends Component {
     }
 
     render() {
-        const {challenge} = this.state
+        const {challenge} = this.props
 
         return (
             <View style={styles.cont}>
@@ -40,22 +40,22 @@ class ChallengeInfo extends Component {
 
 const styles = EStyleSheet.create({
     cont: {
-      marginTop: "5%"
+        width: "70%",
+        marginLeft: "5%",
+      marginTop: "3%",
+      backgroundColor: "#22233c",
+      padding: "3%"
     },
     title: {
       fontSize: '2rem',
       textAlign: "center",
       fontWeight: "200",
-      marginTop: 10,
-      marginLeft: 10,
-      marginRight: 10,
       color: "#eee"
     },
     bonusText: {
       fontSize: '1.2rem',
       textAlign: "center",
-      marginLeft: 10,
-      marginRight: 10,
+      marginTop: 20,
       color: "#eee"
     }
 })

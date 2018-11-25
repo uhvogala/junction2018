@@ -16,13 +16,23 @@ class Challenges extends Component {
   }
 
   render() {
+
+    const {challenges} = this.props
+
     return (
       <View style={styles.cont}>
         <Text style={styles.title}>Upcoming challenges</Text>
-        <View style={styles.challenge}>
+        {challenges.map((c, i) => (
+          <View style={styles.challenge} key={i}>
+            <Text style={styles.challengeTitle}>{c.name}</Text>
+            <Text style={styles.challengeText}>In {c.distance} km</Text>
+            <Button title="Join" color="#30b4bd" onPress={() => this.props.changeChallenge(i)} />
+          </View>
+        ))}
+        {/*<View style={styles.challenge}>
           <Text style={styles.challengeTitle}>Challenge Abc</Text>
           <Text style={styles.challengeText}>In 14.6 km</Text>
-          <Button title="Join" color="#30b4bd" onPress={() => null} />
+          <Button title="Join" color="#30b4bd" onPress={(} />
         </View>
         <View style={styles.challenge}>
           <Text style={styles.challengeTitle}>Challenge Öäå</Text>
@@ -33,7 +43,7 @@ class Challenges extends Component {
           <Text style={styles.challengeTitle}>Challenge Pööbää</Text>
           <Text style={styles.challengeText}>In 14.6 km</Text>
           <Button title="Join" color="#30b4bd" onPress={() => null} />
-        </View>
+        </View>*/}
       </View>
     )
   }
