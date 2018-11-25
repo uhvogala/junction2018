@@ -32,7 +32,7 @@ export default class App extends React.Component {
         {
           name: "Daily Safe Driving Challenge",
           description: "Drive as safely as possible.",
-          previousBestUser: "Bobo",
+          previousBestUser: "Bobox",
           previousBestValue: 96,
           distance: "142.6"
         }

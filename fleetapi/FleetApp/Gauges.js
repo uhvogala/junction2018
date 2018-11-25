@@ -19,6 +19,7 @@ class Gauges extends Component {
 
   render() {
     const { fuelConsumption } = this.props.data;
+    console.log(this.props.data);
     const drivingScore = fuelConsumption;
     let drivingScoreColor = '#e60808';
     if (drivingScore > 25) drivingScoreColor = '#ca7d22';

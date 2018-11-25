@@ -55,7 +55,7 @@ const styles = EStyleSheet.create({
         fontWeight: "200",
         color: "#eee",
         borderTopLeftRadius: 5,
-        borderTopRighRadiuis: 5
+        borderTopRightRadius: 5
     },
     bonusText: {
         fontSize: '1.2rem',
