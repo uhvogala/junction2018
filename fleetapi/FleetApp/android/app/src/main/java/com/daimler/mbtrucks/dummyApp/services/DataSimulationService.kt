@@ -22,7 +22,7 @@ object DataSimulationService {
     // Simulate data coming from the sensors every time interval [2sec]
     private fun getDataFromSensor() {
         val handler = Handler()
-        var timesUpdated = 0
+        var timePassed = 0
         val maxFuelLevel = 200.0f
         var currentFuelLevel = 100.0f
         var currentSpeed = 0.0f
@@ -33,15 +33,15 @@ object DataSimulationService {
             override fun run() {
                 // Distance = speed (km/h) * time (s => / 3600)
                 distance += (currentSpeed * (2f / 3600f))
-                // Update speed and fuel consumption every two seconds
+                // Update speed and fuel consumption every 0.1 seconds
                 currentSpeed = 60.0f + r.nextFloat() * 40.0f
                 val randomFuelConsumption: Float = 0.1f + r.nextFloat() * 0.89f
                 handleMessage(VehicleMessage(VehicleTopicConsts.VEHICLE_SPEED, currentSpeed, ValidState.VALID))
                 handleMessage(VehicleMessage(VehicleTopicConsts.CURRENT_FUEL_CONSUMPTION, randomFuelConsumption, ValidState.VALID))
                 handleMessage(VehicleMessage(VehicleTopicConsts.TOTAL_VEHICLE_DISTANCE, distance.toLong(), ValidState.VALID))
 
-                // Update fuel level every three times
-                if (timesUpdated.rem(3) == 0) {
+                // Every 6 seconds
+                if (timePassed.rem(6000) == 0) {
                     // 2 % of the time refuel random amount
                     if (r.nextFloat() < 0.02f) {
                         // refuel between 30 and 55 liters
@@ -55,8 +55,8 @@ object DataSimulationService {
                     handleMessage(VehicleMessage(VehicleTopicConsts.FUEL_LEVEL, currentFuelLevel, ValidState.VALID))
                 }
 
-                timesUpdated += 1
-                handler.postDelayed(this, 2000)
+                timePassed += 500
+                handler.postDelayed(this, 500)
             }
         }
         handler.postDelayed(runnable, 2000)
