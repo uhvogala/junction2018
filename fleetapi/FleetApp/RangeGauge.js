@@ -6,9 +6,9 @@ class RangeGauge extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      normalRange: 400,
-      currentRange: 440,
-      totalRange: 460
+      normalRange: 340,
+      currentRange: 400,
+      totalRange: 430
     }
   }
 
