@@ -75,10 +75,21 @@ class Leaderboard extends Component {
   }
   
   componentWillMount() {
+    this._mounted = true;
     this.getLeaderboard()
   }
 
-  getLeaderboard() {
+  componentDidMount() {
+    this._mounted = true;
+    this.interval = setInterval(this.getLeaderboard, 2000);
+  }
+
+  componentWillUnmount() {
+    this._mounted = false;
+    clearInterval(this.interval);
+  }
+
+  getLeaderboard = () => {
     /*this.setState({
       leaderboard: [
         {position: "1", name: "Bob"},
@@ -91,7 +102,9 @@ class Leaderboard extends Component {
     fetch(url)
     .then(resp => resp.json())
     .then(data => {
-      this.setState({leaderboard: data.map((driver, i) => ({name: Object.keys(driver)[0], score:  Object.values(driver)[0], position: i+1})).slice(0,4), error: false})
+      if (this._mounted){
+        this.setState({leaderboard: data.map((driver, i) => ({name: Object.keys(driver)[0], score:  Object.values(driver)[0], position: i+1})).slice(0,4), error: false})
+      }
     })
     .catch(err => this.setState({error: true}))
   }
