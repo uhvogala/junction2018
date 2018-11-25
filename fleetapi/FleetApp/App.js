@@ -61,7 +61,7 @@ export default class App extends React.Component {
             selected={selectedTab}
             style={{height: 40, width: '100%'}} onSelect={this.onTabSelect} />
           {selectedTab === 0 &&
-            <View><Gauges data={apiData} />
+            <View style={{justifyContent: 'center'}} ><Gauges data={apiData} />
             <RangeGauge data={apiData} /></View>
           }
           {selectedTab === 1 &&
